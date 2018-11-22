@@ -16,4 +16,4 @@ const IndexPage = props => (
   </Layout>
 )
 
-export default connect(state => ({}))(IndexPage)
+export default IndexPage

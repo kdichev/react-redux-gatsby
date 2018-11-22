@@ -4,6 +4,7 @@ import { navigate } from 'gatsby'
 import Layout from '../components/layout'
 import { connect } from 'react-redux'
 import TextField from '../components/TextField'
+import { onAuth, onInputChange } from '../state/createStore'
 
 const Login = props => {
   return (
@@ -27,13 +28,9 @@ export default connect(
   ({ loginForm: { userName, passWord } }) => ({ userName, passWord }),
   dispatch => ({
     onClick: ({ email, password }) => () => {
-      dispatch({
-        type: 'AUTHENTICATE',
-        payload: { userData: { email, password } },
-      })
+      dispatch(onAuth({ email, password }))
       return navigate('/', { replace: true })
     },
-    onChange: ({ name, value }) =>
-      dispatch({ type: 'ON_INPUT_CHANGE', payload: { name, value } }),
+    onChange: ({ name, value }) => dispatch(onInputChange({ name, value })),
   })
 )(Login)

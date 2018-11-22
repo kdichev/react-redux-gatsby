@@ -1,6 +1,22 @@
 import { createStore, combineReducers } from 'redux'
 import { devToolsEnhancer } from 'redux-devtools-extension'
 
+export const AUTHENTICATE = 'AUTHENTICATE'
+export const LOGOUT = 'LOGOUT'
+export const ON_INPUT_CHANGE = 'ON_INPUT_CHANGE'
+
+export const onLogout = () => ({ type: LOGOUT })
+
+export const onAuth = ({ email, password }) => ({
+  type: AUTHENTICATE,
+  payload: { userData: { email, password } },
+})
+
+export const onInputChange = ({ name, value }) => ({
+  type: ON_INPUT_CHANGE,
+  payload: { name, value },
+})
+
 const auth = (
   state = {
     isAuth: false,
@@ -9,10 +25,10 @@ const auth = (
   action
 ) => {
   switch (action.type) {
-    case 'AUTHENTICATE':
+    case AUTHENTICATE:
       const { userData } = action.payload
       return { ...state, isAuth: true, userData: userData }
-    case 'LOGOUT':
+    case LOGOUT:
       return { ...state, isAuth: false, userData: null }
     default:
       return state
@@ -27,8 +43,9 @@ const loginForm = (
   action
 ) => {
   switch (action.type) {
-    case 'ON_INPUT_CHANGE':
-      return { ...state, [action.payload.name]: action.payload.value }
+    case ON_INPUT_CHANGE:
+      const { name, value } = action.payload
+      return { ...state, [name]: value }
     default:
       return state
   }

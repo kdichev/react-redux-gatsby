@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import Image from '../components/image'
 import { connect } from 'react-redux'
+import { onLogout } from '../state/createStore'
 
 const IndexPage = ({ isAuth, logout }) => (
   <Layout>
@@ -25,6 +26,6 @@ const IndexPage = ({ isAuth, logout }) => (
 )
 
 export default connect(
-  state => ({ isAuth: state.auth.isAuth }),
-  dispatch => ({ logout: () => dispatch({ type: 'LOGOUT' }) })
+  ({ auth: { isAuth } }) => ({ isAuth }),
+  dispatch => ({ logout: () => dispatch(onLogout()) })
 )(IndexPage)
