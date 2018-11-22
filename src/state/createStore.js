@@ -1,19 +1,35 @@
 import { createStore, combineReducers } from 'redux'
 import { devToolsEnhancer } from 'redux-devtools-extension'
 
-const initialState = { count: 0 }
+const authInitialState = {
+  isAuth: false,
+  userData: null,
+}
 
-const counter = (state = initialState, action) => {
+const auth = (state = authInitialState, action) => {
   switch (action.type) {
-    case 'INCREMENT':
-      return { ...state, count: state.count + 1 }
+    case 'AUTHENTICATE':
+      return { ...state, isAuth: true, userData: action.payload.userData }
     default:
       return state
   }
-  return state
+}
+
+const loginFormInitialState = {
+  userName: '',
+  passWord: '',
+}
+
+const loginForm = (state = loginFormInitialState, action) => {
+  switch (action.type) {
+    case 'ON_INPUT_CHANGE':
+      return { ...state, [action.payload.name]: action.payload.value }
+    default:
+      return state
+  }
 }
 
 const configureStore = () =>
-  createStore(combineReducers({ counter }), devToolsEnhancer())
+  createStore(combineReducers({ auth, loginForm }), devToolsEnhancer())
 
 export default configureStore

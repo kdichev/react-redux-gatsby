@@ -7,15 +7,15 @@ import { connect } from 'react-redux'
 
 const IndexPage = props => (
   <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
-      <Image />
-    </div>
-    {props.count}
-    <Link to="/page-2/">Go to page 2</Link>
+    <h1>Welcome</h1>
+    <p>Now go login and do something great.</p>
+    <Link to="/login/">
+      <button> login</button>
+    </Link>
+    <Link to="/app/profile">
+      <button>profile</button>
+    </Link>
   </Layout>
 )
 
-export default connect(state => ({ count: state.counter.count }))(IndexPage)
+export default IndexPage
