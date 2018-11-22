@@ -3,17 +3,29 @@ import { Link } from 'gatsby'
 
 import Layout from '../components/layout'
 import Image from '../components/image'
+import { connect } from 'react-redux'
+import { onLogout } from '../state/createStore'
 
-const IndexPage = () => (
+const IndexPage = ({ isAuth, logout }) => (
   <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    <h1>Welcome</h1>
+    <p>Now go login and do something great.</p>
+    {!isAuth ? (
+      <Link to="/login/">
+        <button> login</button>
+      </Link>
+    ) : (
+      <button onClick={logout}> logout</button>
+    )}
+    {isAuth && (
+      <Link to="/app/profile">
+        <button>profile</button>
+      </Link>
+    )}
   </Layout>
 )
 
-export default IndexPage
+export default connect(
+  ({ auth: { isAuth } }) => ({ isAuth }),
+  dispatch => ({ logout: () => dispatch(onLogout()) })
+)(IndexPage)
