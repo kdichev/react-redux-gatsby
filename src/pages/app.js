@@ -6,11 +6,12 @@ import Layout from '../components/layout'
 import Image from '../components/image'
 import { connect } from 'react-redux'
 import PrivateRoute from '../components/PrivateRoute'
+import Profile from '../components/profile'
 
 const IndexPage = props => (
   <Layout>
     <Router>
-      <PrivateRoute path="/app/profile" component={() => <div>profile</div>} />
+      <PrivateRoute path="/app/profile" component={Profile} />
     </Router>
   </Layout>
 )

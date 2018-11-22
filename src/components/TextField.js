@@ -8,6 +8,7 @@ const TextField = ({ label, ...props }) => {
       <br />
       <input
         name={props.name}
+        value={props.value}
         onChange={e =>
           props.onChange({ name: e.target.name, value: e.target.value })
         }
